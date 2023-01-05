@@ -1,56 +1,103 @@
-Using ``matrix_divided``
------------------------
+===================================
+Test for module 2-matrix_divided.py
+===================================
 
-Checks if all matrix items are ints or floats
-Checks if length of lists in matrix are same
-Checks if div is a float or int or 0
-Divides all items in matrix by div
-Returns a new matrix
+This tests only one function: ``matrix_divided(matrix, div)``.
 
-First import ``matrix_divided``
+Matrix
+=========
+	empty matrix
+	------------
+::
+	>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+	>>> matrix = [[]]
+	>>> matrix_divided(matrix, 3)
+	[[]]
 
-    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
 
-Now use it:
+::
+	Matrix type
+	-----------
+	>>> matrix = ([1, 2, 3], [4, 5, 6])
+	>>> matrix_divided(matrix, 3)
+	Traceback (most recent call last):
+	    ...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
+	
+	
+	Matrix element type
+	-------------------
+	>>> matrix = [(1, 2, 3), [4, 6, 7]]
+	>>> matrix_divided(matrix, 2.7)
+	Traceback (most recent call last):
+	    ...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-Basic usage:
-    >>> matrix = [[1, 2, 3], [4, 5, 6]]
-    >>> print(matrix_divided(matrix, 3))
-    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
 
-Non int/float inputs in lists of matrix:
-    >>> matrix = [['h', 'o', 'l'], ['b', 5, 6]]
-    >>> print(matrix_divided(matrix, 5))
-    Traceback (most recent call last):
-    ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
+	Variable length of matrix elements
+	----------------------------------
+	>>> matrix = [[1, 2], [4, 6, 7]]
+	>>> matrix_divided(matrix, 2)
+	Traceback (most recent call last):
+	    ...
+	TypeError: Each row of the matrix must have the same size
 
-Zero "div" input:
-    >>> matrix = [[1, 2, 3], [4, 5, 6]]
-    >>> print(matrix_divided(matrix, 0))
-    Traceback (most recent call last):
-    ...
-    ZeroDivisionError: division by zero
 
-Different list length in matrix input:
-    >>> matrix = [[1, 2, 3], [4, 5]]
-    >>> print(matrix_divided(matrix, 2))
-    Traceback (most recent call last):
-    ...
-    TypeError: Each row of the matrix must have the same size
+	Type of element in list in matrix
+	---------------------------------
+	>>> matrix = [[1, "3", 45], [4, 6, 7]]
+	>>> matrix_divided(matrix, 3)
+	Traceback (most recent call last):
+	    ...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
+	>>> matrix = [[1, 3, 2+6j], [4, 6, 7]]
+	>>> matrix_divided(matrix, 3)
+	Traceback (most recent call last):
+	    ...
+	TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-Negative variables in list inputs:
-    >>> matrix = [[1, 2, -3], [4, 5, -6]]
-    >>> print(matrix_divided(matrix, 2))
-    [[0.5, 1.0, -1.5], [2.0, 2.5, -3.0]]
 
-Empty matrix input:
-    >>> matrix = [[]]
-    >>> print(matrix_divided(matrix, 2))
-    [[]]
 
-No input:
-    >>> print(matrix_divided())
-    Traceback (most recent call last):
-    ...
-    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+
+Divisor
+========
+::
+	argument div as string
+	----------------------
+	>>> matrix = [[1, 3, 45], [4, 6, 7]]
+	>>> matrix_divided(matrix, "3")
+	Traceback (most recent call last):
+	    ...
+	TypeError: div must be a number
+
+
+	argument div as None
+	----------------------
+	>>> matrix = [[1, 3, 45], [4, 6, 7]]
+	>>> matrix_divided(matrix, None)
+	Traceback (most recent call last):
+	    ...
+	TypeError: div must be a number
+
+
+	argument div as 0
+	------------------------------
+	>>> matrix = [[1, 3, 45], [4, 6, 7]]
+	>>> matrix_divided(matrix, 0)
+	Traceback (most recent call last):
+	    ...
+	ZeroDivisionError: division by zero
+
+
+
+Ideal cases
+===============================
+::
+	>>> matrix = [[1, 3, 45], [4, 6, 7]]
+	>>> matrix_divided(matrix, 3)
+	[[0.33, 1.0, 15.0], [1.33, 2.0, 2.33]]
+
+
+	>>> matrix = [[1.2, 3.667, 4.5], [4.56, 6.6766, 7.005]]
+	>>> matrix_divided(matrix, 3.89)
+	[[0.31, 0.94, 1.16], [1.17, 1.72, 1.8]]

@@ -1,60 +1,83 @@
-Using ``add_integer``
------------------------
+=================================
+Test for module 0-add_integer.py
+=================================
 
-Parameter "b" is defaulted to int "98"
-Makes sure the parameters are type int
-Returns the sum of the parameters
+This tests only one function: ``add_integer(a, b=98)``.
 
-First import ``add_integer``
+Numbers
+=========
+	integers
+	--------
+::
+	>>> add_integer = __import__('0-add_integer').add_integer
+	>>> add_integer(2, 4)
+	6
+	>>> add_integer(-100, 34)
+	-66
+	>>> add_integer(-10)
+	88
 
-    >>> add_integer = __import__('0-add_integer').add_integer
 
-Now use it:
+::
+	Floating point numbers are converted to integers
+	
+	floats
+	-------
+	>>> add_integer(5.6, 2.7)
+	7
+	>>> add_integer(-2.3, 1.9)
+	-1
 
-Basic usage:
-    >>> add_integer(1, 2)
-    3
 
-Negative input:
-    >>> add_integer(100, -2)
-    98
+Strings
+=======
+Strings must return TypeError
+::
+	argument 'a' as string
+	----------------------
+	>>> add_integer("2", 3)
+	Traceback (most recent call last):
+	    ...
+	TypeError: a must be an integer
 
-One input:
-    >>> add_integer(2)
-    100
 
-Float and negative input:
-    >>> add_integer(100.3, -2)
-    98
+	>>> add_integer('tee')
+	Traceback (most recent call last):
+	    ...
+	TypeError: a must be an integer
 
-Float overflow:
-    >>> add_integer(1500.5)
-    1598
 
-Float NaN:
-    >>> add_integer(float('NaN'))
-    Traceback (most recent call last):
-    ...
-    ValueError: cannot convert float NaN to integer
+	argument 'b' as string
+	----------------------
+	>>> add_integer(3, "-6")
+	Traceback (most recent call last):
+	    ...
+	TypeError: b must be an integer
 
-String input:
-    >>> add_integer(4, "School")
-    Traceback (most recent call last):
-    ...
-    TypeError: b must be an integer
 
-None input:
-    >>> add_integer(None)
-    Traceback (most recent call last):
-    ...
-    TypeError: a must be an integer
 
-Double negative float input:
-    >>> add_integer(-100.5, -10.8)
-    -110
+None values and complex numbers
+===============================
+::
+	>>> add_integer(None)
+	Traceback (most recent call last):
+	    ...
+	TypeError: a must be an integer
 
-Double string input:
-    >>> add_integer("holberton", "school")
-    Traceback (most recent call last):
-    ...
-    TypeError: a must be an integer
+
+	>>> add_integer(-15, None)
+	Traceback (most recent call last):
+	    ...
+	TypeError: b must be an integer
+
+
+	>>> add_integer(2+3j, 4)
+	Traceback (most recent call last):
+	    ...
+	TypeError: a must be an integer
+
+
+	>>> add_integer(-8.5, -5+4j)
+	Traceback (most recent call last):
+	    ...
+	TypeError: b must be an integer
